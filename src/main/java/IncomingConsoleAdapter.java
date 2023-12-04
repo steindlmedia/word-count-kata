@@ -1,4 +1,3 @@
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -6,11 +5,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class IncomingAdapter implements IncomingPort {
+public class IncomingConsoleAdapter implements IncomingPort {
   private InputStream inputStream;
   private OutputStream outputStream;
 
-  public IncomingAdapter(InputStream inputStream, OutputStream outputStream) {
+  public IncomingConsoleAdapter(InputStream inputStream, OutputStream outputStream) {
     this.inputStream = inputStream;
     this.outputStream = outputStream;
   }

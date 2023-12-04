@@ -5,7 +5,7 @@ import java.io.InputStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class IncomingAdapterTest {
+class IncomingConsoleAdapterTest {
   @Test
   void testReadInput() throws IOException {
     String input = "Mary had a little lamb";
@@ -13,7 +13,7 @@ class IncomingAdapterTest {
     InputStream inputStream = new ByteArrayInputStream(input.getBytes());
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    IncomingAdapter adapter = new IncomingAdapter(inputStream, outputStream);
+    IncomingConsoleAdapter adapter = new IncomingConsoleAdapter(inputStream, outputStream);
 
     Assertions.assertEquals(input, adapter.readInput());
     Assertions.assertEquals("Enter text: ", outputStream.toString());

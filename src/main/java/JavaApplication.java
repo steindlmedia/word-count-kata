@@ -27,7 +27,7 @@ public class JavaApplication {
       WordCountService wordCountService = new WordCountService(new Tokenizer(), StopWordFilter.of(stopWordInputStream));
 
       JavaApplication application = new JavaApplication(
-          new IncomingAdapter(System.in, System.out),
+          IncomingPortFactory.createPort(args, System.in, System.out),
           new OutgoingAdapter(System.out),
           wordCountService
       );
