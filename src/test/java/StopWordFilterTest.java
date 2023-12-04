@@ -16,6 +16,11 @@ class StopWordFilterTest {
     }
   }
 
+  @Test
+  void testOf_constructStopWordList_nullList_throwsException() {
+    Assertions.assertThrows(NullPointerException.class, () -> StopWordFilter.of((List<String>) null));
+  }
+
   @ParameterizedTest
   @ValueSource(strings = {"the", "a", "on", "off"})
   void testIsStopWord_stopWord_returnsTrue(String stopWord) {

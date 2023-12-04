@@ -11,6 +11,10 @@ public class StopWordFilter {
   }
 
   public static StopWordFilter of(List<String> stopWords) {
+    if (stopWords == null) {
+      throw new NullPointerException("list must not be null");
+    }
+
     return new StopWordFilter(stopWords);
   }
 
