@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class WordCountService {
-  private Tokenizer tokenizer;
+  private final Tokenizer tokenizer;
 
   public WordCountService(Tokenizer tokenizer) {
     this.tokenizer = tokenizer;

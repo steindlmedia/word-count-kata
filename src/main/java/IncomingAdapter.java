@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class IncomingAdapter implements IncomingPort {
@@ -17,7 +18,7 @@ public class IncomingAdapter implements IncomingPort {
   @Override
   public String readInput() throws IOException {
     // Ask user to provide text
-    try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(this.outputStream))) {
+    try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(this.outputStream), true)) {
       writer.write("Enter text: ");
       writer.flush();
     }
