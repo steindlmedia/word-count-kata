@@ -15,10 +15,33 @@ class JavaApplicationTest {
     InputStream inputStream = new ByteArrayInputStream(input.getBytes());
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    JavaApplication application = new JavaApplication(new IncomingAdapter(inputStream, outputStream), new OutgoingAdapter(outputStream));
+    JavaApplication application = new JavaApplication(
+        new IncomingAdapter(inputStream, outputStream),
+        new OutgoingAdapter(outputStream)
+    );
     application.run();
 
     Assertions.assertEquals("Enter text: Number of words: 5\n", outputStream.toString());
+  }
+
+  @Test
+  void testRunWithStopWordRemoval() throws IOException {
+    String input = "Mary had a little lamb";
+
+    InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    try (InputStream stopWordInputStream = JavaApplication.class.getResourceAsStream("stopwords.txt")) {
+      JavaApplication application = new JavaApplication(
+          new IncomingAdapter(inputStream, outputStream),
+          new OutgoingAdapter(outputStream),
+          new WordCountService(new Tokenizer(), StopWordFilter.of(stopWordInputStream))
+      );
+
+      application.run();
+    }
+
+    Assertions.assertEquals("Enter text: Number of words: 4\n", outputStream.toString());
   }
 
   @ParameterizedTest
@@ -27,7 +50,10 @@ class JavaApplicationTest {
     InputStream inputStream = new ByteArrayInputStream(input.getBytes());
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    JavaApplication application = new JavaApplication(new IncomingAdapter(inputStream, outputStream), new OutgoingAdapter(outputStream));
+    JavaApplication application = new JavaApplication(
+        new IncomingAdapter(inputStream, outputStream),
+        new OutgoingAdapter(outputStream)
+    );
     application.run();
 
     Assertions.assertEquals("Enter text: Number of words: 0\n", outputStream.toString());

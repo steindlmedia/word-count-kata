@@ -1,3 +1,4 @@
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,6 +37,12 @@ class WordCountServiceTest {
   void testCountWords_multipleWords_caseSensitive() {
     WordCountService wordCountService = new WordCountService(new Tokenizer());
     Assertions.assertEquals(5, wordCountService.countWords("Mary had a little lamb"));
+  }
+
+  @Test
+  void testCountWords_stopWordFilter_oneWordNotCounted() {
+    WordCountService wordCountService = new WordCountService(new Tokenizer(), StopWordFilter.of(List.of("the", "a", "on", "off")));
+    Assertions.assertEquals(4, wordCountService.countWords("Mary had a little lamb"));
   }
 
   @Test
